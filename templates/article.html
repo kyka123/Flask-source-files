@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="app">
+        <h1>Artykuł numer: {{id}}.</h1>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat dolores velit quasi enim vitae labore
+            consectetur reprehenderit veniam est, unde dicta minus recusandae id quibusdam doloremque vero assumenda
+            libero
+            obcaecati!
+        </p>
+        <br />
+
+        <h2>Add Comment</h2>
+        <form name="comment" class="new-comment" action="/add/{{id}}" method="POST">
+            <div class="form--group">
+                <input class="form-control" type="text" name="author" id="author" placeholder="author">
+            </div>
+            <br />
+            <div class="form-group">
+                <textarea class="form-control" type="text" name="content" id="content" placeholder="content"></textarea>
+            </div>
+            <br />
+            <div class="new-comment__actions">
+                <button class="btn btn-warning" type="submit">Zkomentuj !</button>
+            </div>
+        </form>
+        <h2>Comments</h2>
+
+
+        <div class="comments">
+            {% if comments[0] %}
+            {% for comment in comments %}
+            <div class="comment">
+                <span class="comment__date">({{ comment.created_at }})</span> <br>
+                <strong>{{ comment.author }}:</strong><br>
+                {{ comment.content }} <br>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="empty">There are no comments.</div>
+            {% endif %}
+        </div>
+
+
+        <br />
+
+    </div>
+</div>
+{% endblock %}
